@@ -26,7 +26,7 @@ static const char *const autostart[] = {
       NULL,                                                                             // Screen Settings
   "picom", NULL,                                                                        // Compositor
   "sh", "-c", "sleep 1; feh --bg-fill ~/GloryhammerWallpaper/ml4jn9hn7f731.jpg", NULL,  // Wallpaper
-  "sh", "-c", "while true; do ~/proj/rstatus/target/release/rstatus; done", NULL,       // Status Bar
+  "sh", "-c", "/home/philipp/proj/dwmblocks/dwmblocks", NULL,       // Status Bar
   "dunst", NULL,                                                                        // Notification Manager
   "kdeconnectd", NULL,                                                                   // Kdeconnect
 	NULL /* terminate */
