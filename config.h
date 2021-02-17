@@ -19,6 +19,20 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_cyan, col_gray1,  col_gray2  },
 };
 
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
+const char *spcmd1[] = {"/home/philipp/Downloads/Timeular.AppImage", NULL };
+const char *spcmd2[] = {"com.bitwarden.desktop", NULL };
+// const char *spcmd3[] = {"keepassxc", NULL };
+static Sp scratchpads[] = {
+	/* name          cmd  */
+	{"timeular",      spcmd1},
+	{"bitwarden",    spcmd2},
+// 	{"keepassxc",   spcmd3},
+};
+
 static const char *const autostart[] = {
   "setxkbmap", "-option", "caps:swapescape", NULL,                                      // Caps Swap Escape
   "nvidia-settings", "--assign", 
@@ -26,6 +40,7 @@ static const char *const autostart[] = {
       NULL,                                                                             // Screen Settings
   "picom", NULL,                                                                        // Compositor
   "sh", "-c", "sleep 1; feh --bg-fill ~/GloryhammerWallpaper/ml4jn9hn7f731.jpg", NULL,  // Wallpaper
+  "sh", "-c", "cd /home/philipp/proj/pulse-launch; pipenv run python pulse_launch.py --term_cmd '/home/philipp/scripts/toggleSpeakers turn_off' --other_cmd '/home/philipp/scripts/toggleSpeakers turn_off' 'alsa_output.usb-BEHRINGER_UMC202HD_192k-00.analog-stereo' '/home/philipp/scripts/toggleSpeakers turn_on'", NULL,  // Wallpaper
   "sh", "-c", "/home/philipp/proj/dwmblocks/dwmblocks", NULL,       // Status Bar
   "dunst", NULL,                                                                        // Notification Manager
   "kdeconnectd", NULL,                                                                   // Kdeconnect
@@ -43,6 +58,8 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "floating", NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ NULL,       "timeular", NULL,       SPTAG(0),     1,           2 },
+	{ NULL,       "bitwarden", NULL,      SPTAG(1),     1,           2 },
 };
 
 /* layout(s) */
@@ -97,6 +114,8 @@ static Key keys[] = {
   { 0,                            0x1008ff14,  spawn,          {.v = playpausecmd } },
   { 0,                            0x1008ff16,  spawn,          {.v = previouscmd } },
   { 0,                            0x1008ff17,  spawn,          {.v = nextcmd } },
+	{ MODKEY,											  XK_period,   togglescratch,  {.ui = 0 } },
+	{ MODKEY,											  XK_minus,  	 togglescratch,  {.ui = 1 } },
 	{ MODKEY,                       XK_b,        togglebar,      {0} },
 	{ MODKEY,                       XK_j,        focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,        focusstack,     {.i = -1 } },
