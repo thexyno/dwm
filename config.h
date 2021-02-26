@@ -44,6 +44,7 @@ static const char *const autostart[] = {
   "sh", "-c", "/home/philipp/proj/dwmblocks/dwmblocks", NULL,       // Status Bar
   "dunst", NULL,                                                                        // Notification Manager
   "kdeconnectd", NULL,                                                                   // Kdeconnect
+  "clipmenud", NULL,                                                                   // Clipmenu
 	NULL /* terminate */
 };
 
@@ -99,6 +100,10 @@ static const char *volmutecmd[]  =    { "bash", "/home/philipp/scripts/changeVol
 static const char *playpausecmd[]  =  { "playerctl", "play-pause", NULL };
 static const char *nextcmd[]  =       { "playerctl", "next", NULL };
 static const char *previouscmd[] =    { "playerctl", "previous", NULL };
+static const char *clipmenucmd[] =    { "clipmenu", NULL };
+static const char *sharenix2cmd[] = { "nextshot", "-a", 0 };
+static const char *sharenix3cmd[] = { "nextshot", "-w", 0 };
+static const char *sharenix4cmd[] = { "nextshot", "-f", 0 };
 
 static Key keys[] = {
 	/* modifier                     key          function        argument */
@@ -107,6 +112,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_v,        spawn,          {.v = pulsemixercmd } },
 	{ MODKEY|ShiftMask,             XK_f,        spawn,          {.v = nnncmd } },
 	{ MODKEY|ControlMask,           XK_Return,   spawn,          {.v = termfloatcmd } },
+	{ MODKEY|Mod1Mask,								XK_2,				 spawn,					 {.v = sharenix2cmd } },
+  { MODKEY|Mod1Mask,								XK_3,				 spawn,					 {.v = sharenix3cmd } },
+  { MODKEY|Mod1Mask, 							XK_4, 			 spawn, 				 {.v = sharenix4cmd } },
+	{ MODKEY|ShiftMask,             XK_c,        spawn,          {.v = clipmenucmd } },
 	{ 0,                            XK_Print,    spawn,          {.v = scrotcmd } },
   { 0,                            0x1008ff11,  spawn,          {.v = voldowncmd } },
   { 0,                            0x1008ff12,  spawn,          {.v = volmutecmd } },
@@ -116,6 +125,7 @@ static Key keys[] = {
   { 0,                            0x1008ff17,  spawn,          {.v = nextcmd } },
 	{ MODKEY,											  XK_period,   togglescratch,  {.ui = 0 } },
 	{ MODKEY,											  XK_minus,  	 togglescratch,  {.ui = 1 } },
+	{ MODKEY,                       XK_s,	       togglesticky,   {0} },
 	{ MODKEY,                       XK_b,        togglebar,      {0} },
 	{ MODKEY,                       XK_j,        focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,        focusstack,     {.i = -1 } },
